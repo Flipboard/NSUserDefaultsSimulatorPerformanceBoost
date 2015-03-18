@@ -47,3 +47,7 @@ It is highly recommended that if you're going to be testing an extension that yo
 ## Contributing
 
 Contributions to this project are very welcome. Contributors to this repository must accept Flipboard’s Apache-style [Individual Contributor License Agreement (CLA)](https://docs.google.com/forms/d/1gh9y6_i8xFn6pA15PqFeye19VqasuI9-bGp_e0owy74/viewform) before any changes can be merged.
+
+## License
+
+This project is available under the BSD 3-clause license. See the [LICENSE file](./LICENSE) for more info.
