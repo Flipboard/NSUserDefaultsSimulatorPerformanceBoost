@@ -57,3 +57,5 @@ Contributions to this project are very welcome. Contributors to this repository 
 ## License
 
 This project is available under the BSD 3-clause license. See the [LICENSE file](./LICENSE) for more info.
+
+Feel free to reach out to me with any questions, comments, concerns, or suggestions on Twitter at [@timonus](https://twitter.com/timonus).
