@@ -9,6 +9,12 @@
 #import <UIKit/UIKit.h>
 #import <XCTest/XCTest.h>
 
+@interface NSUserDefaults (Private)
+
+- (id)fl_objectForKey:(NSString *)key;
+
+@end
+
 @interface NSUserDefaultsSimulatorPerformanceBoostDemoTests : XCTestCase
 
 @end
@@ -17,24 +23,73 @@
 
 - (void)setUp {
     [super setUp];
-    // Put setup code here. This method is called before the invocation of each test method in the class.
 }
 
 - (void)tearDown {
-    // Put teardown code here. This method is called after the invocation of each test method in the class.
     [super tearDown];
 }
 
-- (void)testExample {
-    // This is an example of a functional test case.
-    XCTAssert(YES, @"Pass");
+- (void)testSetAndRetrieveObject
+{
+    NSString *const key = [[NSUUID UUID] UUIDString];
+    id object = NSStringFromSelector(_cmd);
+    
+    // Set
+    [[NSUserDefaults standardUserDefaults] setObject:object forKey:key];
+    
+    // Retrieve
+    id result = [[NSUserDefaults standardUserDefaults] objectForKey:key];
+    
+    // Retrieve underlying object
+    id underlyingResult = [[NSUserDefaults standardUserDefaults] fl_objectForKey:key];
+    
+    XCTAssertEqualObjects(object, result, @"Input and output results inconsistent.");
+    XCTAssertEqualObjects(result, underlyingResult, @"Output result inconsistent with actual value stored in NSUserDefaults.");
 }
 
-- (void)testPerformanceExample {
-    // This is an example of a performance test case.
-    [self measureBlock:^{
-        // Put the code you want to measure the time of here.
-    }];
+- (void)testSetAndRemoveObject
+{
+    NSString *const key = [[NSUUID UUID] UUIDString];
+    id object = NSStringFromSelector(_cmd);
+    
+    // Set
+    [[NSUserDefaults standardUserDefaults] setObject:object forKey:key];
+    
+    // Remove
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:key];
+    
+    // Retrieve
+    id result = [[NSUserDefaults standardUserDefaults] objectForKey:key];
+    
+    // Retrieve underlying object
+    id underlyingResult = [[NSUserDefaults standardUserDefaults] fl_objectForKey:key];
+    
+    XCTAssertNil(result, @"Input and output results inconsistent.");
+    XCTAssertNil(underlyingResult, @"Output result inconsistent with actual value stored in NSUserDefaults.");
 }
+
+- (void)testRegisteredDefaults
+{
+    // register
+    // check value == registered value
+}
+
+- (void)testRegisteredDefaultsWithOverriddenValue
+{
+    // register
+    // set object on top
+    // check value == overridden value
+}
+
+- (void)testRegisteredDefualtsWithRemovedValue
+{
+    // register
+    // set object on top
+    // remove object on top
+    // check value == registered value
+}
+
+// TODO: Primative types
+// TODO: Differing instances
 
 @end
